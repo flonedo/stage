@@ -1,0 +1,138 @@
+Prediction with pre-trained yolov3 model (gluoncv) -- https://gluon-cv.mxnet.io/build/examples_detection/demo_yolo.html#sphx-glr-build-examples-detection-demo-yolo-py
+
+-- needed packages --
+	from gluoncv import model_zoo, data, utils
+	from matplotlib import pyplot as plt
+	
+-- import pre-trained model from gluoncv model zoo--
+	net = model_zoo.get_model('yolo3_darknet53_voc', pretrained=True)
+	
+-- download image for object detection --
+	im_fname = utils.download('https://raw.githubusercontent.com/zhreshold/' +
+                          'mxnet-ssd/master/data/demo/dog.jpg',
+                          path='dog.jpg')
+
+-- transform img into format required for computation --
+	x, img = data.transforms.presets.yolo.load_test(im_fname, short=512)
+	
+-- computation; we feed the data x to the network --
+class_IDs, scores, bounding_boxs = net(x)
+
+-- create plot of results -- 
+ax = utils.viz.plot_bbox(img, bounding_boxs[0], scores[0],
+                         class_IDs[0], class_names=net.classes)
+						 
+-- show plot --
+plt.show()
+
+
+
+Training a pre-trained yolov3 model -- https://gluon-cv.mxnet.io/build/examples_datasets/pascal_voc.html#sphx-glr-build-examples-datasets-pascal-voc-py
+
+-- download dataset and uncompress it--
+
+-- import needed packages --
+import gluoncv as gcv
+from gluoncv.data import VOCDetection
+
+-- split and assign datasets into training, test batches --
+train_dataset = VOCDetection(splits=[(2007, 'trainval'), (2012, 'trainval')])
+# and use 2007 test as validation data
+val_dataset = VOCDetection(splits=[(2007, 'test')])
+
+-- we apply transformation to images during training --
+	from gluoncv.data.transforms import presets
+	from gluoncv import utils
+	from mxnet import nd
+	width, height = 416, 416  # resize image to 416x416 after all data augmentation
+	train_transform = presets.yolo.YOLO3DefaultTrainTransform(width, height)
+	val_transform = presets.yolo.YOLO3DefaultValTransform(width, height)
+	utils.random.seed(123)  # fix seed in this tutorial
+	
+-- data loader to feed training data to the model -- batchify
+	from gluoncv.data.batchify import Tuple, Stack, Pad
+	from mxnet.gluon.data import DataLoader
+	batch_size = 2  # for tutorial, we use smaller batch-size
+	num_workers = 0  # you can make it larger(if your CPU has more cores) to accelerate data loading
+	# behavior of batchify_fn: stack images, and pad labels
+	batchify_fn = Tuple(Stack(), Pad(pad_val=-1))
+	train_loader = DataLoader(train_dataset.transform(train_transform), batch_size, shuffle=True,
+                          batchify_fn=batchify_fn, last_batch='rollover', num_workers=num_workers)
+	val_loader = DataLoader(val_dataset.transform(val_transform), batch_size, shuffle=False,
+                        batchify_fn=batchify_fn, last_batch='keep', num_workers=num_workers)	
+	for ib, batch in enumerate(train_loader):
+		if ib > 3:
+			break
+		print('data 0:', batch[0][0].shape, 'label 0:', batch[1][0].shape)
+		print('data 1:', batch[0][1].shape, 'label 1:', batch[1][1].shape)
+		
+--import pre-trained model--
+	from gluoncv import model_zoo
+	net = model_zoo.get_model('yolo3_darknet53_voc', pretrained_base=True) =>true allows usage of a pre-trained model
+		
+	
+	
+-- training -- full training script https://gluon-cv.mxnet.io/_downloads/train_yolo_v3.py (tutorial script)
+									https://gluon-cv.mxnet.io/_downloads/train_yolo3.py
+									https://gluon-cv.mxnet.io/_downloads/train_yolo3_rand_size.py
+									https://gluon-cv.mxnet.io/_downloads/pascal_voc.py (training data)
+									=> by default they run on gpu 0?
+	!!!	train_transform = presets.yolo.YOLO3DefaultTrainTransform(width, height, net) =>it works on gpu
+	!!! train_transform = presets.yolo.YOLO3DefaultTrainTransform(width, height) =>works
+	
+	sudo poweroff
+
+	
+	https://gluon-cv.mxnet.io/_downloads/train_yolo3_rand_size.py => error gpu is not enabled ( when running in environment with gpu)
+	 # training contexts
+    ctx = [mx.gpu(int(i)) for i in args.gpus.split(',') if i.strip()]
+    ctx = ctx if ctx else [mx.cpu()] ????
+	
+___________________________________________________________________________________________________________________________________________________________
+
+
+	train_yolo3.py ValueError: Children of HybridBlock must also be HybridBlock, but [HybridSequential( *net structure*) ]  has type <type 'list'>. If you are using Sequential, please try HybridSequential instead.
+
+	train_yolo_v3.py (simplified training loop) ValueError: Children of HybridBlock must also be HybridBlock, but [HybridSequential( *net structure*) ]  has type <type 'list'>. If you are using Sequential, please try HybridSequential instead.
+
+	train_yolo3_rand_size.py (simplified training loop) ValueError: Children of HybridBlock must also be HybridBlock, but [HybridSequential( *net structure*) ]  has type <type 'list'>. If you are using Sequential, please try HybridSequential instead.
+	
+	demo_yolo.py (object detection) Children of HybridBlock must also be HybridBlock, but [HybridSequential( *net structure*) ]  has type <type 'list'>. If you are using Sequential, please try HybridSequential instead.
+	
+	=> when net layers are not hybridblock?
+	from gluoncv import model_zoo
+	net = model_zoo.get_model('yolo3_darknet53_voc', pretrained_base=False)
+
+DOCS:	
+gluoncv.model_zoo.yolo3_darknet53_voc(pretrained_base=True, pretrained=False, num_sync_bn_devices=-1, **kwargs)[source]
+YOLO3 multi-scale with darknet53 base network on VOC dataset.
+	Parameters:	
+		pretrained_base (boolean) – Whether fetch and load pretrained weights for base network.
+		pretrained (boolean) – Whether fetch and load pretrained weights for the entire network.
+		num_sync_bn_devices (int) – Number of devices for training. If num_sync_bn_devices < 2, SyncBatchNorm is disabled.
+	Returns:	
+		Fully hybrid yolo3 network.
+	Return type:	
+		mxnet.gluon.HybridBlock
+		
+	
+		
+		
+	LOOKING FOR THE RIGHT VERSIONS...
+	source activate mxnet_p27 +
+	
+		apt-get install python-dev
+		yolo OK
+		pip install mxnet==1.3.0b20180905 gluon==1.1.0 gluoncv==0.3.0b20180905 OK
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		

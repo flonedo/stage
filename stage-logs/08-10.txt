@@ -1,0 +1,37 @@
+dockepostman per fare richieste http a servizi rest
+robo 3t per mongodb
+server in python flask (tramite connexion di zalando)
+pymongo per gestire mongodb attraverso python
+
+mongodb database nosql per gestire la coda delle richieste
+mongodb attraverso container docker
+
+
+docker build -t myrepo:mytag .
+docker run -it -d -e "pippo=plut" --name test myrepo:mytag
+
+
+
+
+
+
+docker build -t obj-recognition .
+docker run -d -it -v d:\data:/opt/data --name test-obj-rec obj-recognition
+docker run -d -it -v docker -p 8080:8080 -e "MONGODB_URI=mongodb://mongo.internal:27017/" -e "NETWORK_MODELS_PATH=/opt/data/object-recognition-demo/models/" --link mongo:mongo.internal --name test-obj-rec obj-recognition
+
+
+
+
+
+
+
+
+
+=> per comunicare due container devono esporre delle porte l'uno all'altro; per farlo c'è il comando link
+variabili d'ambiente da dichiarare in docker all'avvio del container (e non nel dockerfile)
+
+
+
+
+
+ModuleNotFoundError: No module named 'object_detection'

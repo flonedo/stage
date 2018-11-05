@@ -1,0 +1,75 @@
+mxnet vs tensorflow comparison to build object detection nn built upon pre-trained yoloV3 (you only look once) model
+	=> TRANSFER LEARNING
+
+nns rely heavily on matrix (tensor) operations that can be optimized for GPU computation
+
+yoloV3 is a convolutional (deep) neural network good for object detection.
+supervised training: the system is given classified examples of what objects in each category are
+
+datasets for training steps are split into 3 parts:
+	 training
+	 test (these first two are split randomly and shuffle interchangeably in a process called cross validation)
+	 validation (separate set to calculate accuracy -- nn has never seen this data before)
+	
+
+MXNET offers
+	- support imperative programming (gluon, gluoncv api)
+	- support symbolic programming (better pereformance, module api)
+	- general purpose toolkit (gluoncv provides direct support to yoloV3 nn and yoloV3 models)
+	- support keras api
+	GLUONCV offers various pre-trained models to choose from (you can also get them non-trained)
+	
+TENSORFLOW offers
+	- support keras api
+	- eager execution (imperative programming)
+	=>https://github.com/qqwweee/keras-yolo3 provides kera yolov3 support
+	
+
+MXNET TRAINING (on pre-trained yoloV3 nn) !a pre-trained model is trained on a specific dataset
+=> recognition of new classes on top of a pre-trained nn (yolov3 layers nn is available)
+steps (with a yoloV3 model):
+	1. import dataset + (data transform) ! imgs must be converted into tensors before being fed to nn
+	2. definition of data batches to iterate 
+		! batchify methods simplify this task 
+		!! img labels require padding to uniform size
+		!!! transforms (distortion) in performed over imgs (data augmentation, yoloV3 has its own function to do it)
+	3. training + test (iterative, parameters must be adjust to avoid overfitting and to minimize learning loss/maximize accuracy)
+	4. validation
+=>basically when you re-use a pre-trained model to recognize additional custom classes you get rid of the topmost layer of the nn 
+and retain the lower ones. Then you re-train it with the custom data in order to re-build a top layer which provides classification/detection.
+This process is called fine-tuning
+
+
+
+ACCURACY: is calculated at the end of training period. it's a percentage
+TRAINING LOSS: how bad the identification system is working during training (must be minimized since it's actually the distrance from
+	wanted result). It's optimal right before divergence (divergence should be avoided).
+	autograd is often used to calculate the gradients of loss functions with respect to parameters
+LEARNIG RATE: how fast the network is learning. too steep learning rate can cause overfitting
+OVERFITTING: network has adjusted to training images so well that it fails to classify test/validation images
+EPOCH: unit of work, a single iteration through the whole training dataset
+NEURAL NETWORK MODELS: define a set of (different) (connected) layers which weight the inputs and combine them to create
+	appropriate outputs for the following layer --backpropagation--.
+CONVOLUTIONAL NEURAL NETWORKS: rely on local information (combine the content of areas of pixels near to each other --kernel, the 
+	kernel strides through the image gathering data--). 
+	Local analysis is later extended and combined --pooling-- with larger areas (compressed in a smaller area) so recognition isn't bounded 
+	to spacial location (it helps to avoid overfitting)
+	
+=> the key to maximize accuracy is to tweak parameters until you reach the wanted result (hyper-tuning)
+	=>initializer is something you might want to change multiple times
+
+HOW TO WORK WITH GLUONCV:
+	- python (anaconda) environment
+	- mxnet must be installed
+	- gluoncv must be installed !pay attention to supported/required versions 
+									sudo pip install gluoncv==0.3.0b20180904 
+									
+
+									
+A pre-trained yoloV3 nn model can either be used to detect objects as is or it can be trained further to recognize custom classes
+									
+
+	
+wget -O pippo.tag.gz http://www.example.com/pippo.tag.gz
+tar zxf pippo.tar.gz -C /out/
+tar jxf pippo.bz2 -C /out/

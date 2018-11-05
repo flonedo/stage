@@ -1,0 +1,20 @@
+dkaggle =>challenges di machine learning
+
+sagemaker => amazon containers for machine learning
+DOCKER
+	docker ps => shows containers
+	docker run -d -it -v d:\data:/opt/data --name mxnet mxnet/python:1.2.1_cpu =>creates a new container with storage
+	
+	docker exec -it *container id* bash
+	
+________________
+
+
+
+python pascal_voc.py --download-dir ~/VOCdevkit
+
+________________
+mxnet v 1.2.1_cpu => hybridsequential error on net
+mxnet v 1.2.1_cpu_mkl => hybridsequential error on net
+
+

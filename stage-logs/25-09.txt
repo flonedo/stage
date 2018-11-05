@@ -1,0 +1,6 @@
+E' NECESSARIO UTILIZZARE EXPORT DELLA RETE (.JSON) E PARAMETRI (.PARAMS) GENERATI ASSIEME
+
+su mxnet impulsary == compulsory LOL
+
+
+Mxnet scala vuole il dataset in formato lst + imageRecord

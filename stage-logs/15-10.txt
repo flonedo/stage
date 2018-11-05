@@ -1,0 +1,95 @@
+tensorflow
+
+docker pull tensorflow/tensorflow:1.10.0-py3
+ 
+docker run -it -p 8888:8888 -v d:\data:/opt/data --name tensorflow tensorflow/tensorflow:1.10.0-py3
+  
+  
+ 
+Keras non ha modelli per object detection
+tensorflow non ha modelli 'official' per object detection
+
+per object detection ci sono ssd, yolo e fast-rcnn, retinanet
+
+protoc object_detection/protos/*.proto --python_out=.
+
+
+
+# jupyter
+export PATH=$PATH:~/.local/bin
+# From tensorflow/models/research/
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+jupyter notebook --ip=0.0.0.0 --port=8080 --allow-root
+
+
+
+tensorflow wants tfrecord files to manage the dataset
+!!!! IN TENSORFLOW I CLASS ID NUMERICI DEVONO INIZIARE DA 1
+
+
+
+
+
+
+
+PIPELINE_CONFIG_PATH=opt/data/object-recognition-demo/tensorflow/training/models/model/pipeline.config
+MODEL_DIR=opt/data/object-recognition-demo/tensorflow/training/models
+NUM_TRAIN_STEPS=50000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+python object_detection/model_main.py \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --model_dir=${MODEL_DIR} \
+    --num_train_steps=${NUM_TRAIN_STEPS} \
+    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \
+    --alsologtostderr
+	
+	
+	Traceback (most recent call last):
+  File "model_main.py", line 25, in <module>
+    from object_detection import model_hparams
+	
+	
+MIGLIORE ACCURATEZZA RISPETTO AI SISTEMI DI CLASSIFICAZIONE NEL CASO DI OGGETTI IMMERSI IN UN CONTESTO​​
+
+​​	
+	
+	
+	
+
+Obiettivo: sviluppare object recognition per integrarlo in THRON
+THRON cosa fa e perché è importante integrare sta cosa
+Cosa abbiamo usato per risolvere il problema: Yolo3 cos'è e a grandi linee come
+Come lo abbiamo integrato: mxnet + gluoncv (che lo implementa già di natura)
+Problemi riscontrati
+Schema archittura generale
+OpenApi + Python + Docker
+Sviluppi futuri: Sagemaker, AWS EMR Spark => training distribuito
+
+
+https://www.websequencediagrams.com/
+
+title Authentication Sequence
+
+Client->DetectionAPI: HTTP POST
+DetectionAPI->JobsQueue: insert()
+JobsQueue-->DetectionAPI: "BUSY", job
+DetectionAPI-->Client: 202, job
+loop detection
+    Consumer->JobsQueue: getJob()
+    JobsQueue-->Consumer: job
+    Consumer->Consumer:predict()
+    Consumer->JobsQueue: update()
+end
+loop check result
+    Client->DetectionAPI:getPrediction
+    DetectionAPI->JobsQueue:getPrediction()
+    JobsQueue-->DetectionAPI:"BUSY", job
+    DetectionAPI-->Client:202, job
+end
+Client->DetectionAPI:HTTP GET
+DetectionAPI->JobsQueue:getPrediction()
+JobsQueue-->DetectionAPI:"COMPLETED", prediction
+DetectionAPI-->Client: 200, prediction
+
+
+

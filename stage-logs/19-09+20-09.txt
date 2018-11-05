@@ -1,0 +1,30 @@
+ net.add(gluon.nn.Dense(128, activation="relu")) => basic layer
+	class mxnet.gluon.nn.Dense(units, activation=None, use_bias=True, flatten=True, dtype='float32', weight_initializer=None, bias_initializer='zeros', in_units=0, **kwargs)
+		activation='relu' => relu: Rectified Linear Unit, y=max(x,0)
+		input data: if flatten is True, data should be a tensor with shape (batch_size, x1, x2, ..., xn), 
+			where x1 * x2 * ... * xn is equal to in_units. If flatten is False, data should have shape (x1, x2, ..., xn, in_units) =>in_units è la dimensione dei dati in input
+			che se non fornita viene inferita dalla forma dei primi dati in input
+		out: if flatten is True, out will be a tensor with shape (batch_size, units). If flatten is False, out will have shape (x1, x2, ..., xn, units). =units è la dimensione
+			dell'output
+ 
+ 
+ 
+ net.add(gluon.nn.Dense(64, activation="relu"))
+ 
+ 
+ 
+ 
+ la documentazione di gluoncv non è accurata e probabilmente non coincide con quanto implementato: la classe lstdetection doveva ereditare da
+ dataset e quindi avere il metodo transform, che in realtà non era disponibile. creando una nuova classe customdetection con il codice fornito 
+ nella documentazione di lst detection tale metodo è invece disponibile
+	
+	
+yolo 3 funziona con dati custom. il dataset deve però essere caricato in un formato particolare ed è necessario il metodo transform
+se il batch è troppo grande (>15?) si verifica bus error. I dati 'giocattolo' però probabilmente creano errori in alcune funzioni 
+che si aspettano valori elevati dei reali cicli di training
+
+=> va bene utilizzate eval metrics di voc
+
+
+
+Hybrid models can be serialized as JSON files using the export function. Once serialized, these models can be loaded from other language bindings like C++ or Scala for faster inference or inference in different environments.

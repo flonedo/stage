@@ -1,0 +1,32 @@
+per utilizzare la gpu è necessario installare cuda nel container 
+
+https://medium.com/smileinnovation/sagemaker-bring-your-own-algorithms-719dd539607d
+
+
+
+
+
+
+
+
+FROM nvidia/cuda:9.0-runtime
+
+RUN apt-get update && \
+    apt-get -y install build-essential python-dev python-pip python-imaging wget curl
+
+
+RUN chmod +x /opt/program/train
+
+RUN pip install setuptools gluoncv==0.4.0b20181025 mxnet==1.3.0
+    
+RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /root/.cache
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
+
+ENV PATH="/opt/program:${PATH}"
+
+COPY yolo3 /opt/program/
+WORKDIR /opt/program

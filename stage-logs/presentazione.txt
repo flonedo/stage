@@ -1,0 +1,53 @@
+1 - TITOLO
+
+2 - cos'è l'object detection. Esempio di bounding boxes sui cuccioli
+
+3 - perché è interessante occuparsi di object detection e quali applicazioni la utilizzano
+	- face detection
+	- motori di ricerca per immagini
+	- conteggio di istanze presenti in un'immagine
+	- rilevazione in tempo reale -> tracciare il movimento di oggetti in un video
+	- confronto con la classificazione, vantaggi
+4 - reti neurali che risolvono il problema di detection. SSD, R-CNN, YOLO. Deep learning. Il grafico mostra i tempi di 
+	rilevazione su GPU titan x
+
+5 - perché abbiamo scelto YOLO. You only look once, per determinare il contenuto dell'immagine questa viene fatta passare attraverso la rete una volta sola, 
+	mente molte concorrenti (come r-cnn) richiedono più passaggi e quindi tempi più lunghi. Framework darknet scritto in C su cui è stata inizialmente implementata yolo, 
+	Joseph Redmon e il cv dei my little pony
+
+6 - scelta del framework. Darknet è un framework per ricerca. framework famosi utilizzabili commercialmente sono tensorflow (google) e 
+	mxnet (apache). Mxnet fornisce api di alto livello (gluon) che nella versione python includono un toolkit di computer vision implementano yolo 3.
+	Tensorflow invece non implementa ufficialmente modelli per l'object detection.
+
+7 - I pregi di gluon cv. fornisce nativamente strumenti completi per la computer vision, implementando modelli di rete ssd, r-cnn e yolo v3.
+	fornisce anche dei modelli di rete 'pre trained', riutilizzabili per eseguire detection out-of-the-box oppure per il transfer learning.
+	il transfer learning (eseguire il training su un nuovo dataset su una rete già istruita su un dataset generico diverso, riutilizzandone i pesi) migliora le performance 
+	e riduce i tempi rispetto al training da zero
+	
+8 - non può essere difficile! scrivendo queste slide anche power point eseguiva delle detection per suggerirmi didascalie per le immagini...
+
+9 - Mxnet è relativamente semplice da utilizzare ma essendo un toolkit giovane (versione 0.3.0! uscita da qualche giorno!) sono presenti alcuni problemi
+	come incongruenze tra la documentazione fornita online/sorgenti e quanto effettivamente presente nella build.
+	Il toolkit di computer vision è solo in python e gluon fornisce solo sun set ridotto strumenti in altri linguaggi, anche se i modelli di rete sono comunque 
+	esportabili.
+	In generale il training è un processo molto dispendioso. Anche con transfer learning il training di modelli dovrebbe essere eseguito su gpu  
+	(quando si parla di tempi lunghi si intende giorni!)
+	Il dataset stesso su cui eseguire il training deve essere composto da centinaia di immagini per ogni categoria per garantire buona accuratezza in fase di predizione
+	(ogni immagine deve avere il bounding box che delimita
+	gli oggetti di interesse, che ovviamente è determinato a manualmente da un umano)
+	aggiungere compatibilit' versioni mxnet e gluon
+	richieste hardware elevate
+	
+10 - le detections sono gestite da un server in python, che implementa delle restful api e inserisce dei job in una coda su mongodb. da questa coda un consumatore 
+	estrae i jobs ed esegue la predizione su framework mxnet. Le richieste http dei client vengono dunque gestite in modo asincrono ed è compito del client verificare 
+	periodicamente se la predizione richiesta è terminata.
+	
+11 - i servizi sono stati definiti come open api, la cui implementazione è stata fatta su server python flask. E' stata utilizzata connexion, un framework di zalando 
+	rilevare e tracciare automaticamente i metodi http dell'open api con l'implementazione su server. La coda dei jobs è stata implementata su mongodb.
+	
+12 - tutto questo è stato inserito in un container docker
+
+13 - in futuro sarà possibile eseguire la detection (e il training!) tramite i servizi di aws. al momento però mxnet in versione 1.3.0 non è ancora supportato
+
+14 - fine
+	

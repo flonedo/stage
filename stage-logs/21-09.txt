@@ -1,0 +1,37 @@
+Alcuni passaggi "standard" spesso usati per il training di reti yolo:
+
+First, pretrain the first 20 convolutional layers using the ImageNet 1000-class competition dataset, using a input size of 224x224
+Then, increase the input resolution to 448x448
+Train the full network for about 135 epochs using a batch size of 64, momentum of 0.9 and decay of 0.0005
+Learning rate schedule: for the first epochs, the learning rate was slowly raised from 0.001 to 0.01. Train for about 75 epochs and then start decreasing it.
+Use data augmentation with random scaling and translations, and randomly adjusting exposure and saturation.
+
+
+TRAINING RESULTS (16 EPOCH, YOLO 3 ON CUSTOM DATASET WITH 12 CLASSES)
+0 alfa romeo O score: 0.9478182 
+1 brembo X
+2 claro X
+3 honeywell X
+4 infor O (score  0.11577629 su infor e score 0.24226223 su honeywell) => le immagini di training sono simili 8sfondo rosso ecc)??
+5 kaspersky X
+6 puma O score:  0.4478803
+7 shell O score: 0.4260505
+8 singha O score: 0.31732082
+9 skf X (score: 0.0966369 su skf)
+10 technogym X
+11 ups O score: 0.7872232
+12 veuve clicquot O score: 0.11330695
+
+~
+
+=> non c'è il pacchetto di mxnet scala per windows?
+
+http://mxnet.incubator.apache.org/install/scala_setup.html
+
+sudo apt-get install libcurl3
+sudo add-apt-repository ppa:timsc/opencv-3.4
+sudo apt-get update
+sudo apt install libopencv-imgcodecs3.4
+cd /mnt/d/data/object-recognition-api
+mvn compile package -P development
+java -cp target/poc-recognition-api.jar com.thron.yolo.Main

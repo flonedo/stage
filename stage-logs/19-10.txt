@@ -1,0 +1,51 @@
+Loading di rete pre-trained: 
+	-	se si usano params+json si devono utilizzare quelli salvati assieme
+	-	se si usa solo il params non si può utilizzare uno di quelli salvati assieme al json
+	
+	
+	
+	
+con gluoncv==0.2.0 e mxnet==1.2.1
+	si può utilizzare ssd
+	funziona su python 2.7 0> problemi su ValueError: zero-dimensional arrays cannot be concatenated
+	np.concatenate(.....)
+	
+	____________________________________________________________________________________________________________________________________________________________________________
+	
+	
+	
+	
+	attualmente funziona la versione Version: 0.3.0b20180904 di gluoncv (e tutte le versioni anteriori al https://github.com/dmlc/gluon-cv/pull/325 del 24 settembre)
+	è stato reintrodotto un errore (corretto precedentemente in https://github.com/dmlc/gluon-cv/pull/250) che non permetteva di concatenare array ad una dimensione
+	
+	
+	mnist_estimator = MXNet(entry_point='/home/ec2-user/sample-notebooks/sagemaker-python-sdk/mxnet_mnist/mnist.py',
+                        role=role,
+                        output_path=model_artifacts_location,
+                        code_location=custom_code_upload_location,
+                        train_instance_count=1, 
+                        train_instance_type='ml.m4.xlarge',
+                        hyperparameters={'learning_rate': 0.1})
+						
+						
+	se image_name non è specificato  viene caricata in automatico l'immagine docker della versione indicata in framework_version
+	=>framework_version è obbligatorio
+	
+	
+	
+	
+	from subprocess import call
+	call("pip install dm-sonnet".split(" ")) per installare gluoncv???
+	oppure
+	import subprocess
+	import sys
+	subprocess.call([sys.executable, '-m', 'pip', 'install', '-U', 'scikit-image') 
+	
+	
+	=>devono implementare un 'requirements.txt' ancora non disponibile
+	al momemento su mxnet per avere moduli aggiuntivi bisogna creare un nuovo container
+
+	
+	
+	
+VERSIONE gluoncv 0.4.0b20181025 HA RISOLTO IL BUG IN as_numpy

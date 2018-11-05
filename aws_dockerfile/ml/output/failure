@@ -1,0 +1,9 @@
+Exception during training: cannot concatenate 'str' and 'float' objects
+Traceback (most recent call last):
+  File "train.py", line 121, in train
+    train_yolo3(net, train_data, val_data, eval_metric, hyparams.ctx, hyparams)
+  File "train.py", line 238, in train_yolo3
+    logger.info(hyparams.get())
+  File "train.py", line 88, in get
+    ' number of gpus: ' + int(self.num_gpus))
+TypeError: cannot concatenate 'str' and 'float' objects

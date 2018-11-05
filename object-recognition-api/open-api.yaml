@@ -1,0 +1,229 @@
+swagger: '2.0'
+host: localhost:8080
+info:
+  title: Object detector
+  version: "0.1-SNAPSHOT"
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: "/api/prediction"
+paths:
+  "/images":
+    post:
+      operationId: app.insertPrediction
+      summary: Requests a new prediction.
+      parameters:
+        - $ref: '#/parameters/ImageBody'
+      responses:
+        202:
+          $ref: '#/responses/202JobResponse'
+        400:
+          $ref: '#/responses/4xxMalformedRequestResponse'
+        default:
+          $ref: '#/responses/500ErrorResponse'
+  "/images/{clientId}/{jobId}":
+    parameters:
+      - $ref: '#/parameters/JobIdPath'
+      - $ref: '#/parameters/ClientIdPath'
+    get:
+      operationId: app.getPrediction
+      summary: Checks if prediction result is available and retrieves it.
+      responses:
+        200:
+          $ref: '#/responses/200GetPredictionResponse'
+        202:
+          $ref: '#/responses/202JobResponse'
+        400:
+          $ref: '#/responses/4xxMalformedRequestResponse'
+        404:
+          $ref: '#/responses/404NotFound'
+        default:
+          $ref: '#/responses/500ErrorResponse'
+    delete:
+      operationId: app.deletePrediction
+      summary: Deletes a prediction.
+      responses:
+        200:
+          $ref: '#/responses/200DeletePredictionResponse'
+        400:
+          $ref: '#/responses/4xxMalformedRequestResponse'
+        404:
+          $ref: '#/responses/404NotFound'
+        default:
+          $ref: '#/responses/500ErrorResponse'
+
+
+definitions:
+
+  Image:
+    type: object
+    required:
+      - uri
+    properties:
+      uri:
+        type: string
+        description: Prediction image uri.
+  ImageInsert:
+    allOf:
+      - $ref: '#/definitions/Image'
+      - type: object
+        required:
+          - clientId
+        properties:
+          clientId:
+            type: string
+            description: Client identity.
+  Job:
+    type: object
+    description: Detection job status.
+    required:
+      - clientId
+      - id
+      - url
+      - image
+      - status
+    properties:
+      clientId:
+        type: string
+        description: Client identifier.
+      id:
+        type: string
+        description: Id to retrieve prediction status and eventual result.
+      url:
+        type: string
+        description: Url to check prediction job status and eventual prediction result.
+      image:
+        $ref: '#/definitions/Image'
+      status:
+        $ref: '#/definitions/JobStatus'
+  JobStatus:
+    type: string
+    description: Prediction job status.
+    enum:
+      - "BUSY"
+      - "FAILED"
+  BoundingBoxPercentage:
+    type: object
+    description: bounding box delimiting a deteted object.
+    required:
+      - xmin
+      - ymin
+      - xmax
+      - ymax
+    properties:
+      xmin:
+        type: number
+        format: float
+      ymin:
+        type: number
+        format: float
+      xmax:
+        type: number
+        format: float
+      ymax:
+        type: number
+        format: float
+  Detection:
+    type: object
+    description: detected object.
+    required:
+      - class
+      - score
+      - boundingBoxPercentage
+    properties:
+      class:
+        type: string
+        description: Detected class name.
+      score:
+        type: number
+        format: float
+        description: Detection confidence score.
+        minimum: 0.0
+        maximum: 1.0
+      boundingBoxPercentage:
+        $ref: '#definitions/BoundingBoxPercentage'
+  ImageDetection:
+    allOf:
+      - $ref: '#/definitions/Image'
+      - type: object
+        required:
+          - detections
+        properties:
+          detections:
+            type: array
+            items:
+              $ref: '#/definitions/Detection'
+  ErrorResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorResponse'
+
+parameters:
+  ImageBody:
+    name: prediction
+    in: body
+    schema:
+        $ref: '#/definitions/ImageInsert'
+  JobIdPath:
+    name: jobId
+    description: Prediction job identifier.
+    required: true
+    in: path
+    type: string
+  ClientIdPath:
+    name: clientId
+    description: Client identifier.
+    required: true
+    in: path
+    type: string
+
+responses:
+  202JobResponse:
+    headers:
+      Location:
+        type: string
+        description: Url to retrieve prediction job status.
+    description: The prediction request has been accepted.
+    schema:
+      $ref: '#/definitions/Job'
+  200GetPredictionResponse:
+    headers:
+      Location:
+        type: string
+        description: Url to retrieve prediction result.
+    description: Prediction job finished and detected value is available.
+    schema:
+      $ref: '#/definitions/ImageDetection'
+  200DeletePredictionResponse:
+    description: Detection job deleted.
+    schema:
+      $ref: '#/definitions/Image'
+  4xxMalformedRequestResponse:
+    description: The request is malformed; ex. the body does not parse, some validation fails, semantically incorrect.
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+  401UnauthorizedResponse:
+    description: Authentication is required but it failed or has not been provided yet.
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+  403ForbiddenResponse:
+   description: The server is refusing action. The user might not have the necessary permissions to access a resource.
+   schema:
+     $ref: '#/definitions/ErrorResponse'
+  404NotFound:
+    description: Resource not found.
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+  500ErrorResponse:
+    description: Unexpected error.
+    schema:
+      $ref: '#/definitions/ErrorResponse'

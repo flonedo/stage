@@ -1,0 +1,8 @@
+{
+  "database_name": "predictions",
+  "collection_name": "jobs",
+  "network_model_name": "network.json",
+  "network_params_name":  "parameters.params",
+  "network_synset_name": "sysnset.txt",
+  "image_resize_dimension": 416
+}

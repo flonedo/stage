@@ -1,0 +1,5 @@
+mxnet==1.3.0
+gluoncv==0.3.0b20181009
+connexion
+pymongo
+requests

@@ -1,0 +1,3 @@
+{"id":"a", "clientId":"clientId", "url":"path-to-image", "data":{"channels":3, "width":100, "height":100, "classes":[{"class":{"className":0.0}, "boundingBox": [0.0, 0.0, 0.0, 0.0]}]}}
+{"id":"a", "clientId":"clientId", "url":"path-to-image", "data":{"channels":3, "width":100, "height":100, "classes":[{"class":{"className":0.0}, "boundingBox": [0.0, 0.0, 0.0, 0.0]}]}}
+{"id":"a", "clientId":"clientId", "url":"path-to-image", "data":{"channels":3, "width":100, "height":100, "classes":[{"class":{"className":0.0}, "boundingBox": [0.0, 0.0, 0.0, 0.0]}]}}

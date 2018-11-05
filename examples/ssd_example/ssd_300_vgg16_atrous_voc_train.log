@@ -1,0 +1,64 @@
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.504 samples/sec, CrossEntropy=20.112, SmoothL1=3.608
+[Epoch 0] Training cost: 15.865, CrossEntropy=20.112, SmoothL1=3.608
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.484 samples/sec, CrossEntropy=20.023, SmoothL1=3.362
+[Epoch 0] Training cost: 16.533, CrossEntropy=20.023, SmoothL1=3.362
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.509 samples/sec, CrossEntropy=20.054, SmoothL1=3.611
+[Epoch 0] Training cost: 15.705, CrossEntropy=20.054, SmoothL1=3.611
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.506 samples/sec, CrossEntropy=20.116, SmoothL1=3.613
+[Epoch 0] Training cost: 15.806, CrossEntropy=20.116, SmoothL1=3.613
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.515 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.524, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.522 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.334, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.520 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.385, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.515 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.525, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.517 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.478, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.517 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.470, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.515 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.543, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.517 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.468, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.515 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.542, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.518 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.433, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.499 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 16.042, CrossEntropy=20.353, SmoothL1=3.581
+Namespace(batch_size=8, data_shape=300, dataset='voc', epochs=10, gpus='0', log_interval=1, lr=0.0008, lr_decay=0.1, lr_decay_epoch='160,200', momentum=0.9, network='vgg16_atrous', num_samples=9, num_workers=0, resume='', save_interval=1, save_prefix='ssd_300_vgg16_atrous_voc', seed=233, start_epoch=0, synset='synset_short.txt', train_dataset='train_ssd.lst', val_interval=1, valid_dataset='valid_ssd.lst', wd=0.0005)
+Start training from [Epoch 0]
+[Epoch 0][Batch 0], Speed: 0.509 samples/sec, CrossEntropy=20.353, SmoothL1=3.581
+[Epoch 0] Training cost: 15.709, CrossEntropy=20.353, SmoothL1=3.581
